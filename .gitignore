@@ -3,3 +3,4 @@ out/
 *.log
 dist/
 /.vs/slnx.sqlite
+/.vs
