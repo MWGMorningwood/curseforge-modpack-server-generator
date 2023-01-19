@@ -68,7 +68,7 @@ module.exports = async function genertateServer(modpackZip, destination) {
 
         for (let mod of manifest.files) {
             console.log(`Fetching information of '${mod.projectID}'`);
-            const modInfo = await fetchJSON(`https://addons-ecs.forgesvc.net/api/v2/addon/${mod.projectID}/`);
+            const modInfo = await fetchJSON(`https://api.curseforge.com/v1/mods/${mod.projectID}/`);
             modList.push({
                 name: modInfo.name,
                 by: modInfo.authors.map(author => author.name).join(', '),
@@ -76,7 +76,7 @@ module.exports = async function genertateServer(modpackZip, destination) {
             });
 
             console.log(`Fetching download information of '${modInfo.name}'`);
-            const files = await fetchJSON(`https://addons-ecs.forgesvc.net/api/v2/addon/${mod.projectID}/files/`);
+            const files = await fetchJSON(`https://api.curseforge.com/v1/mods/${mod.projectID}/files/`);
             console.log(`Fetched download information of '${modInfo.name}'`);
             console.log(`Searching for file '${mod.fileID}'`);
             const file = files.find(file => file.id === mod.fileID);
